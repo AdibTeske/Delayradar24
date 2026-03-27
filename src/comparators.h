@@ -1,28 +1,28 @@
 #pragma once
 #include "data_processing.h"
 
-// Comparator to sort airports by their average delay from lowest to highest
-struct AscendingDelay {
+// Comparator to sort airport VECTOR by their average delay in descending order
+struct DescendingDelay {
     bool operator()(const AirportData& a, const AirportData& b) const {
         return a.averageDelay < b.averageDelay;
     }
 };
 
-// Comparator to sort airports by their average delay from highest to lowest
-struct DescendingDelay {
+// Comparator to sort airport VECTOR by their average delay in ascending order
+struct AscendingDelay {
     bool operator()(const AirportData& a, const AirportData& b) const {
         return a.averageDelay > b.averageDelay;
     }
 };
 
-// Comparator to sort airports by their 3-letter code in alphabetical order (A-Z)
+// Comparator to sort airport VECTOR by their 3-letter code in alphabetical order (A-Z)
 struct AscendingLexi {
     bool operator()(const AirportData& a, const AirportData& b) const {
         return a.airportCode > b.airportCode;
     }
 };
 
-// Comparator to sort airports by their 3-letter code in reverse alphabetical order (Z-A)
+// Comparator to sort airport VECTOR by their 3-letter code in reverse alphabetical order (Z-A)
 struct DescendingLexi {
     bool operator()(const AirportData& a, const AirportData& b) const {
         return a.airportCode < b.airportCode;
