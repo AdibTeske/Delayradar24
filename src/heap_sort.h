@@ -1,16 +1,17 @@
 #pragma once
 #include "data_processing.h"
 #include <vector>
+#include <cstddef>
 
 // Re-orders subtrees iteratively to maintain the heap property.
 // This function moves an Airport instance down the tree until it is in the correct relative position
 template <typename Comparison>
-void heapifyDown(std::vector<AirportData>& data, int size, int index, Comparison comparator) {
+void heapifyDown(std::vector<AirportData>& data, size_t size, size_t index, Comparison comparator) {
     while (true) {
         // Calculates the positions of the children in a 0-indexed array
-        int leftIndex = 2 * index + 1;
-        int rightIndex = 2 * index + 2;
-        int extremaIndex = index;
+        size_t leftIndex = 2 * index + 1;
+        size_t rightIndex = 2 * index + 2;
+        size_t extremaIndex = index;
 
         // Check if left child exists and if it should be higher in the heap than the current parent
         if (leftIndex < size && comparator(data[leftIndex], data[extremaIndex])) {
@@ -41,12 +42,12 @@ void heapifyDown(std::vector<AirportData>& data, int size, int index, Comparison
 template <typename Comparison>
 void heapSort(std::vector<AirportData>& data, Comparison comparator) {
     // Build the initial heap by heapifying downwards on the upper half ot the heap
-    for (int i = data.size() / 2; i >= 0; i--) {
-        heapifyDown(data, data.size(), i, comparator);
+    for (size_t i = data.size() / 2 + 1; i > 0; i--) {
+        heapifyDown(data, data.size(), i - 1, comparator);
     }
 
     // Extract elements from the heap one by one to sort
-    for (int i = data.size() - 1; i >= 0; i--) {
+    for (size_t i = data.size() - 1; i > 0; i--) {
         // Build a "sorted" section of the vector by swapping with the root of the heap (Max/Min)
         AirportData temp = data[0];
         data[0] = data[i];
