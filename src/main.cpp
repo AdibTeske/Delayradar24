@@ -2,6 +2,7 @@
 #include "UI.h"
 #include "comparators.h"
 #include "heap_sort.h"
+#include "quick_sort.h"
 #include <iostream>
 #include <vector>
 
@@ -26,22 +27,22 @@ int main() {
         switch (choice) {
             case 1: // Highest First (VECTOR is sorted descending)
                 heapSort(data, DescendingDelay{});
-                // quicksort
+                quickSort(data, DescendingDelay{});
                 break;
 
             case 2: // Lowest First (VECTOR is sorted ascending)
                 heapSort(data, AscendingDelay{});
-                //quicksort
+                quickSort(data, AscendingDelay{});
                 break;
 
             case 3: // A First (VECTOR is sorted ascending lexicographically)
                 heapSort(data, AscendingLexi{});
-                // quicksort
+                quickSort(data, AscendingLexi{});
                 break;
 
             case 4: // Z First (VECTOR is sorted descending lexicographically)
                 heapSort(data, DescendingLexi{});
-                // quicksort
+                quickSort(data, DescendingLexi{});
                 break;
 
             case 5: // Exit
