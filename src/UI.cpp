@@ -31,8 +31,12 @@ void printCentered(const std::string& text) {
 }
 
 void printRanking(const std::vector<AirportData>& data, size_t num) {
+    std::cout << "Ranking (Airport Code: average delay per flight in minutes)" << std::endl;
+
+    // Set precision to 2 decimal places
+    std::cout << std::fixed << std::setprecision(2);
+
     // Iterate through the first 'num' elements of the presumed sorted vector
-    std::cout << "Ranking (Airport Code: average delay in minutes)" << std::endl;
     for (size_t i = 0; i < num; i++) {
         std::cout << (i + 1) << ". " << data[i].airportCode << ": " << data[i].averageDelay << std::endl;
     }

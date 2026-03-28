@@ -2,8 +2,10 @@
 #include "UI.h"
 #include "comparators.h"
 #include "heap_sort.h"
+#include "quick_sort.h"
 #include <iostream>
 #include <vector>
+#include <chrono>
 
 
 int main() {    
@@ -21,27 +23,62 @@ int main() {
     // Main program loop
     while (true) {
         int choice = getMenuChoice();
+        std::chrono::high_resolution_clock::time_point t1Heap, t2Heap, t3Quick, t4Quick;
+
+        // Deep copy for controlled comparison
+        std::vector<AirportData> data2 = data;
 
         // Determine sorting choice based on user input
         switch (choice) {
             case 1: // Highest First (VECTOR is sorted descending)
+                // Execute Heap Sort and measure elapsed time
+                t1Heap = std::chrono::high_resolution_clock::now();
                 heapSort(data, DescendingDelay{});
-                // quicksort
+                t2Heap = std::chrono::high_resolution_clock::now();
+
+                // Execute Quick Sort and measure elapsed time
+                t3Quick = std::chrono::high_resolution_clock::now();
+                quickSort(data2, DescendingDelay{});
+                t4Quick = std::chrono::high_resolution_clock::now();
+
                 break;
 
             case 2: // Lowest First (VECTOR is sorted ascending)
+                // Execute Heap Sort and measure elapsed time
+                t1Heap = std::chrono::high_resolution_clock::now();
                 heapSort(data, AscendingDelay{});
-                //quicksort
+                t2Heap = std::chrono::high_resolution_clock::now();
+
+                // Execute Quick Sort and measure elapsed time
+                t3Quick = std::chrono::high_resolution_clock::now();
+                quickSort(data2, AscendingDelay{});
+                t4Quick = std::chrono::high_resolution_clock::now();
+
                 break;
 
             case 3: // A First (VECTOR is sorted ascending lexicographically)
+                // Execute Heap Sort and measure elapsed time
+                t1Heap = std::chrono::high_resolution_clock::now();
                 heapSort(data, AscendingLexi{});
-                // quicksort
+                t2Heap = std::chrono::high_resolution_clock::now();
+
+                // Execute Quick Sort and measure elapsed time
+                t3Quick = std::chrono::high_resolution_clock::now();
+                quickSort(data2, AscendingLexi{});
+                t4Quick = std::chrono::high_resolution_clock::now();
+
                 break;
 
             case 4: // Z First (VECTOR is sorted descending lexicographically)
+                // Execute Heap Sort and measure elapsed time
+                t1Heap = std::chrono::high_resolution_clock::now();
                 heapSort(data, DescendingLexi{});
-                // quicksort
+                t2Heap = std::chrono::high_resolution_clock::now();
+
+                // Execute Quick Sort and measure elapsed time
+                t3Quick = std::chrono::high_resolution_clock::now();
+                quickSort(data2, DescendingLexi{});
+                t4Quick = std::chrono::high_resolution_clock::now();
                 break;
 
             case 5: // Exit
@@ -55,6 +92,14 @@ int main() {
         // Retrieves valid user input and prints the sorted data accordingly
         size_t num = getValidListSize();
         printRanking(data, num);
+
+        // Calculate elapsed time of both Heap Sort and Quick Sort
+        auto elapsedTimeHeap = std::chrono::duration_cast<std::chrono::microseconds>(t2Heap - t1Heap);
+        auto elapsedTimeQuick = std::chrono::duration_cast<std::chrono::microseconds>(t4Quick - t3Quick);
+        
+        // Print results to compare
+        std::cout << "Time taken by Heap Sort: " << elapsedTimeHeap.count() << " microseconds" << std::endl;
+        std::cout << "Time taken by Quick Sort: " << elapsedTimeQuick.count() << " microseconds" << std::endl;
         
         // Determine if program should exit or loop back to menu
         std::cout << "Would you like to go again? (Y/N)" << std::endl;
