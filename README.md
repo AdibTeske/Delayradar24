@@ -6,6 +6,7 @@ The goal of this project is to create a program that can take a massive dataset 
 
 <H2> How to Run <H2>
 
-1. Clone the repository
+1. Clone the repository's submission branch by "git clone -b submission https://github.com/AdibTeske/Delayradar24.git"
+2. Open 'Delayradar24' folder in IDE
 2. Compile the code with "make" in the terminal (mac), "mingw32-make" (win)
 3. Run the executable with "./delayradar.exe" (mac), ".\delayradar.exe" (win)
